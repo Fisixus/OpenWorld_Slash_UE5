@@ -3,3 +3,4 @@ _ExternalObjects_/** filter=lfs diff=lfs merge=lfs -text
 _ExternalActors_/** filter=lfs diff=lfs merge=lfs -text
 AncientContent/** filter=lfs diff=lfs merge=lfs -text
 Megascans/** filter=lfs diff=lfs merge=lfs -text
+MedievalDungeon/** filter=lfs diff=lfs merge=lfs -text
