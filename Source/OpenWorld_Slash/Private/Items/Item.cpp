@@ -10,16 +10,17 @@
 AItem::AItem()
 {
 	PrimaryActorTick.bCanEverTick = true;
-
+	ItemMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ItemMeshComponent"));
+	RootComponent = ItemMeshComponent;
 }
 
 void AItem::BeginPlay()
 {
 	Super::BeginPlay();
 	//UE_LOG(LogTemp, Warning, TEXT("HOLA!"));
-	const FVector Location = GetActorLocation();
-	DEBUG_DRAW_SPHERE(Location, FColor::Blue)
-	DEBUG_DRAW_VECTOR(Location, Location + GetActorForwardVector()*100.f, FColor::Blue)
+	//const FVector Location = GetActorLocation();
+	//DEBUG_DRAW_SPHERE(Location, FColor::Blue)
+	//DEBUG_DRAW_VECTOR(Location, Location + GetActorForwardVector()*100.f, FColor::Blue)
 }
 
 void AItem::Tick(float DeltaTime)
