@@ -7,6 +7,8 @@
 #include "EnhancedInputComponent.h"
 #include "InputActionValue.h"
 #include "Components/InputComponent.h"
+#include "GameFramework/SpringArmComponent.h"
+#include "Camera/CameraComponent.h"
 
 ABird::ABird()
 {
@@ -16,6 +18,13 @@ ABird::ABird()
 	SKMeshComponent = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("SKMeshComponent"));
 	SKMeshComponent->SetupAttachment(GetRootComponent());
 
+	SpringArmComponent = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArmComponent"));
+	SpringArmComponent->SetupAttachment(GetRootComponent());
+	SpringArmComponent->TargetArmLength = 300.f;
+	
+	CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("CameraComponent"));
+	CameraComponent->SetupAttachment(SpringArmComponent);
+	
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
 }
 
@@ -36,17 +45,58 @@ void ABird::BeginPlay()
 
 void ABird::MoveBird(const FInputActionValue& Value)
 {
-	const bool CurrentValue = Value.Get<bool>();
-	if(CurrentValue)
+	const FVector CurrentValue = Value.Get<FVector>();
+	if(CurrentValue.Z > 0)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("IA_Move Working!"));
+		MoveUpBird();
+		UE_LOG(LogTemp, Warning, TEXT("UP!"));
 	}
+	else if(CurrentValue.Z < 0)
+	{
+		MoveDownBird();
+		UE_LOG(LogTemp, Warning, TEXT("DOWN!"));
+	}
+	else if(CurrentValue.Y > 0)
+	{
+		MoveRightBird();
+		UE_LOG(LogTemp, Warning, TEXT("RIGHT!"));
+	}
+	else if(CurrentValue.Y < 0)
+	{
+		MoveLeftBird();
+		UE_LOG(LogTemp, Warning, TEXT("LEFT!"));
+	}
+}
+
+void ABird::MoveUpBird()
+{
+	const FVector Up = GetActorUpVector();
+	AddMovementInput(Up, 1);
+}
+
+void ABird::MoveDownBird()
+{
+	const FVector Down = -GetActorUpVector();
+	AddMovementInput(Down, 1);
+}
+
+void ABird::MoveRightBird()
+{
+	const FVector Right = GetActorRightVector();
+	AddMovementInput(Right, 1);
+}
+
+void ABird::MoveLeftBird()
+{
+	const FVector Left = -GetActorRightVector();
+	AddMovementInput(Left, 1);
 }
 
 void ABird::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	//const FVector Forward = GetActorForwardVector();
+	//AddMovementInput(Forward, 1);
 }
 
 void ABird::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)

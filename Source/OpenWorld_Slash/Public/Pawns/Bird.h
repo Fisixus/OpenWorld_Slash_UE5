@@ -11,6 +11,8 @@ class UCapsuleComponent;
 class USkeletalMeshComponent;
 class UInputMappingContext;
 class UInputAction;
+class USpringArmComponent;
+class UCameraComponent;
 
 UCLASS()
 class OPENWORLD_SLASH_API ABird : public APawn
@@ -36,5 +38,15 @@ private:
 	TObjectPtr<UInputMappingContext> BirdMappingContext;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input ,meta = (AllowPrivateAccess = true))
 	TObjectPtr<UInputAction> BirdMoveAction;
+
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr<USpringArmComponent> SpringArmComponent;
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr<UCameraComponent> CameraComponent;
+
+	void MoveUpBird();
+	void MoveDownBird();
+	void MoveRightBird();
+	void MoveLeftBird();
 
 };
