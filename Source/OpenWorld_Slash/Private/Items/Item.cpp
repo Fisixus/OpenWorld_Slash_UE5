@@ -2,10 +2,7 @@
 
 
 #include "Items/Item.h"
-
 #include "OpenWorld_Slash/DebugMacros.h"
-
-
 
 AItem::AItem()
 {

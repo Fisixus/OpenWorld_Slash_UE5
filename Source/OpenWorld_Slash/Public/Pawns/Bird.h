@@ -3,8 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "InputActionValue.h"
 #include "GameFramework/Pawn.h"
 #include "Bird.generated.h"
+
+class UCapsuleComponent;
+class USkeletalMeshComponent;
+class UInputMappingContext;
+class UInputAction;
 
 UCLASS()
 class OPENWORLD_SLASH_API ABird : public APawn
@@ -14,11 +20,21 @@ class OPENWORLD_SLASH_API ABird : public APawn
 public:
 	ABird();
 	virtual void Tick(float DeltaTime) override;
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
 protected:
 	virtual void BeginPlay() override;
+	void MoveBird(const FInputActionValue& Value);
 
+private:
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr<UCapsuleComponent> CapsuleComponent;
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr<USkeletalMeshComponent> SKMeshComponent;
 	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input ,meta = (AllowPrivateAccess = true))
+	TObjectPtr<UInputMappingContext> BirdMappingContext;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input ,meta = (AllowPrivateAccess = true))
+	TObjectPtr<UInputAction> BirdMoveAction;
 
 };
