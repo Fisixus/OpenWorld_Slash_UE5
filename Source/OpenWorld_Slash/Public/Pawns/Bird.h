@@ -27,6 +27,7 @@ public:
 protected:
 	virtual void BeginPlay() override;
 	void MoveBird(const FInputActionValue& Value);
+	void RotateBird(const FInputActionValue& Value);
 
 private:
 	UPROPERTY(VisibleAnywhere)
@@ -38,15 +39,17 @@ private:
 	TObjectPtr<UInputMappingContext> BirdMappingContext;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input ,meta = (AllowPrivateAccess = true))
 	TObjectPtr<UInputAction> BirdMoveAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input ,meta = (AllowPrivateAccess = true))
+	TObjectPtr<UInputAction> BirdLookAction;
+	UPROPERTY(EditAnywhere, Category=Input, meta = (ClampMin = "0.1", ClampMax = "1.0", UIMin = "0.1", UIMax = "1.0"))
+	float MouseSensitivity = 0.5f;
 
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<USpringArmComponent> SpringArmComponent;
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UCameraComponent> CameraComponent;
 
-	void MoveUpBird();
-	void MoveDownBird();
-	void MoveRightBird();
-	void MoveLeftBird();
+	void MoveForwardBird();
+	void MoveBackwardBird();
 
 };

@@ -45,58 +45,45 @@ void ABird::BeginPlay()
 
 void ABird::MoveBird(const FInputActionValue& Value)
 {
-	const FVector CurrentValue = Value.Get<FVector>();
-	if(CurrentValue.Z > 0)
+	const float ForwardValue = Value.Get<float>();
+	if(Controller && ForwardValue > 0)
 	{
-		MoveUpBird();
-		UE_LOG(LogTemp, Warning, TEXT("UP!"));
+		MoveForwardBird();
+		//UE_LOG(LogTemp, Warning, TEXT("Forward!"));
 	}
-	else if(CurrentValue.Z < 0)
+	else if(Controller && ForwardValue < 0)
 	{
-		MoveDownBird();
-		UE_LOG(LogTemp, Warning, TEXT("DOWN!"));
-	}
-	else if(CurrentValue.Y > 0)
-	{
-		MoveRightBird();
-		UE_LOG(LogTemp, Warning, TEXT("RIGHT!"));
-	}
-	else if(CurrentValue.Y < 0)
-	{
-		MoveLeftBird();
-		UE_LOG(LogTemp, Warning, TEXT("LEFT!"));
+		MoveBackwardBird();
+		//UE_LOG(LogTemp, Warning, TEXT("Backward!"));
 	}
 }
 
-void ABird::MoveUpBird()
+void ABird::RotateBird(const FInputActionValue& Value)
 {
-	const FVector Up = GetActorUpVector();
-	AddMovementInput(Up, 1);
+	const FVector2D LookAxisValue = Value.Get<FVector2D>();
+	if(Controller)
+	{
+		AddControllerYawInput(LookAxisValue.X * MouseSensitivity);
+		AddControllerPitchInput(LookAxisValue.Y * MouseSensitivity);
+	}
 }
 
-void ABird::MoveDownBird()
+void ABird::MoveForwardBird()
 {
-	const FVector Down = -GetActorUpVector();
-	AddMovementInput(Down, 1);
+	const FVector Forward = GetActorForwardVector();
+	AddMovementInput(Forward, 1);
 }
 
-void ABird::MoveRightBird()
+void ABird::MoveBackwardBird()
 {
-	const FVector Right = GetActorRightVector();
-	AddMovementInput(Right, 1);
+	const FVector Backward = -GetActorForwardVector();
+	AddMovementInput(Backward, 1);
 }
 
-void ABird::MoveLeftBird()
-{
-	const FVector Left = -GetActorRightVector();
-	AddMovementInput(Left, 1);
-}
 
 void ABird::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	//const FVector Forward = GetActorForwardVector();
-	//AddMovementInput(Forward, 1);
 }
 
 void ABird::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -106,6 +93,7 @@ void ABird::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	if(const TObjectPtr<UEnhancedInputComponent> EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
 	{
 		EnhancedInputComponent->BindAction(BirdMoveAction, ETriggerEvent::Triggered, this, &ABird::MoveBird);
+		EnhancedInputComponent->BindAction(BirdLookAction, ETriggerEvent::Triggered, this, &ABird::RotateBird);
 	}
 
 }
