@@ -8,6 +8,7 @@
 #include "EnhancedInputComponent.h"
 #include "../DebugMacros.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "GroomComponent.h"
 
 AMainCharacter::AMainCharacter()
 {
@@ -18,6 +19,9 @@ AMainCharacter::AMainCharacter()
 	SpringArmComponent->TargetArmLength = 300.f;
 	SpringArmComponent->bUsePawnControlRotation = true;
 	
+	SpringArmComponent->bEnableCameraLag = true;
+	SpringArmComponent->CameraLagSpeed = 30.f;
+	
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("CameraComponent"));
 	CameraComponent->SetupAttachment(SpringArmComponent);
 	
@@ -26,8 +30,18 @@ AMainCharacter::AMainCharacter()
 	
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationRoll = false;
-	bUseControllerRotationYaw = true;
+	bUseControllerRotationYaw = false;
 	//AutoPossessPlayer = EAutoReceiveInput::Player0;
+
+	
+	HairComponent = CreateDefaultSubobject<UGroomComponent>(TEXT("HairComponent"));
+	HairComponent->SetupAttachment(GetMesh());
+	HairComponent->AttachmentName = FString("head");
+
+	EyebrowsComponent = CreateDefaultSubobject<UGroomComponent>(TEXT("EyebrowsComponent"));
+	EyebrowsComponent->SetupAttachment(GetMesh());
+	EyebrowsComponent->AttachmentName = FString("head");
+	
 }
 
 void AMainCharacter::BeginPlay()

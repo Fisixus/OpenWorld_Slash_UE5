@@ -11,6 +11,7 @@ class USpringArmComponent;
 class UCameraComponent;
 class UInputMappingContext;
 class UInputAction;
+class UGroomComponent;
 
 UCLASS()
 class OPENWORLD_SLASH_API AMainCharacter : public ACharacter
@@ -42,4 +43,10 @@ private:
 
 	UPROPERTY(EditAnywhere, Category=Input, meta = (ClampMin = "0.1", ClampMax = "1.0", UIMin = "0.1", UIMax = "1.0"))
 	float MouseSensitivity = 0.5f;
+
+	UPROPERTY(EditAnywhere, Category=Accessories)
+	TObjectPtr<UGroomComponent> HairComponent;
+	
+	UPROPERTY(EditAnywhere, Category=Accessories)
+	TObjectPtr<UGroomComponent> EyebrowsComponent;
 };
