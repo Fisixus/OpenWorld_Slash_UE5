@@ -28,6 +28,7 @@ protected:
 	virtual void BeginPlay() override;
 	void MoveCharacter(const FInputActionValue& Value);
 	void LookCharacter(const FInputActionValue& Value);
+	void JumpCharacter(const FInputActionValue& Value);
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input ,meta = (AllowPrivateAccess = true))
 	TObjectPtr<UInputMappingContext> MainCharMappingContext;
@@ -35,6 +36,8 @@ private:
 	TObjectPtr<UInputAction> MainCharMoveAction;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input ,meta = (AllowPrivateAccess = true))
 	TObjectPtr<UInputAction> MainCharLookAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input ,meta = (AllowPrivateAccess = true))
+	TObjectPtr<UInputAction> MainCharJumpAction;
 	
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<USpringArmComponent> SpringArmComponent;
