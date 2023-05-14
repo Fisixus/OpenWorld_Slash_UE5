@@ -1,11 +1,11 @@
 {
     "Version": "1.2",
     "Data": {
-        "Source": "c:\\users\\uerden4601\\desktop\\unrealapplications\\openworld_untitled(slash)_ue5\\openworld_slash_ue5\\plugins\\developer\\riderlink\\source\\ridershaderinfo\\ridershaderinfo.cpp",
+        "Source": "c:\\users\\uerden4601\\desktop\\ue_openworld\\openworld_slash_ue5\\plugins\\developer\\riderlink\\source\\ridershaderinfo\\ridershaderinfo.cpp",
         "ProvidedModule": "",
         "Includes": [
-            "c:\\users\\uerden4601\\desktop\\unrealapplications\\openworld_untitled(slash)_ue5\\openworld_slash_ue5\\plugins\\developer\\riderlink\\intermediate\\build\\win64\\unrealeditor\\development\\ridershaderinfo\\definitions.h",
-            "c:\\users\\uerden4601\\desktop\\unrealapplications\\openworld_untitled(slash)_ue5\\openworld_slash_ue5\\plugins\\developer\\riderlink\\source\\ridershaderinfo\\ridershaderinfo.h",
+            "c:\\users\\uerden4601\\desktop\\ue_openworld\\openworld_slash_ue5\\plugins\\developer\\riderlink\\intermediate\\build\\win64\\unrealeditor\\development\\ridershaderinfo\\definitions.h",
+            "c:\\users\\uerden4601\\desktop\\ue_openworld\\openworld_slash_ue5\\plugins\\developer\\riderlink\\source\\ridershaderinfo\\ridershaderinfo.h",
             "c:\\program files\\epic games\\ue_5.1\\engine\\source\\runtime\\core\\public\\modules\\moduleinterface.h",
             "c:\\program files\\epic games\\ue_5.1\\engine\\source\\runtime\\core\\public\\coretypes.h",
             "c:\\program files\\epic games\\ue_5.1\\engine\\source\\runtime\\core\\public\\hal\\platform.h",

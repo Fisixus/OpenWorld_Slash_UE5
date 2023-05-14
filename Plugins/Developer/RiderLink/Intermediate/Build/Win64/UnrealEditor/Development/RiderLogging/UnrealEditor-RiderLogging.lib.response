@@ -6,6 +6,6 @@
 /NAME:"UnrealEditor-RiderLogging.dll"
 /IGNORE:4221
 /NODEFAULTLIB
-"C:\Users\uerden4601\Desktop\UnrealApplications\OpenWorld_Untitled(Slash)_UE5\OpenWorld_Slash_UE5\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderLogging\Module.RiderLogging.cpp.obj"
-"C:\Users\uerden4601\Desktop\UnrealApplications\OpenWorld_Untitled(Slash)_UE5\OpenWorld_Slash_UE5\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderLogging\Default.rc2.res"
-/OUT:"C:\Users\uerden4601\Desktop\UnrealApplications\OpenWorld_Untitled(Slash)_UE5\OpenWorld_Slash_UE5\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderLogging\UnrealEditor-RiderLogging.lib"
+"C:\Users\uerden4601\Desktop\UE_OpenWorld\OpenWorld_Slash_UE5\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderLogging\Module.RiderLogging.cpp.obj"
+"C:\Users\uerden4601\Desktop\UE_OpenWorld\OpenWorld_Slash_UE5\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderLogging\Default.rc2.res"
+/OUT:"C:\Users\uerden4601\Desktop\UE_OpenWorld\OpenWorld_Slash_UE5\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderLogging\UnrealEditor-RiderLogging.lib"

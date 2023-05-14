@@ -1,10 +1,10 @@
 {
     "Version": "1.2",
     "Data": {
-        "Source": "c:\\users\\uerden4601\\desktop\\unrealapplications\\openworld_untitled(slash)_ue5\\openworld_slash_ue5\\plugins\\developer\\riderlink\\source\\rd\\thirdparty\\thirdparty.cpp",
+        "Source": "c:\\users\\uerden4601\\desktop\\ue_openworld\\openworld_slash_ue5\\plugins\\developer\\riderlink\\source\\rd\\thirdparty\\thirdparty.cpp",
         "ProvidedModule": "",
         "Includes": [
-            "c:\\users\\uerden4601\\desktop\\unrealapplications\\openworld_untitled(slash)_ue5\\openworld_slash_ue5\\plugins\\developer\\riderlink\\intermediate\\build\\win64\\unrealeditor\\development\\rd\\definitions.h"
+            "c:\\users\\uerden4601\\desktop\\ue_openworld\\openworld_slash_ue5\\plugins\\developer\\riderlink\\intermediate\\build\\win64\\unrealeditor\\development\\rd\\definitions.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

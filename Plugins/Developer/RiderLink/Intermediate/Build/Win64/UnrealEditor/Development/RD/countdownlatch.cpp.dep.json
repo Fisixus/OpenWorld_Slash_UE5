@@ -1,10 +1,10 @@
 {
     "Version": "1.2",
     "Data": {
-        "Source": "c:\\users\\uerden4601\\desktop\\unrealapplications\\openworld_untitled(slash)_ue5\\openworld_slash_ue5\\plugins\\developer\\riderlink\\source\\rd\\thirdparty\\countdownlatch\\countdownlatch.cpp",
+        "Source": "c:\\users\\uerden4601\\desktop\\ue_openworld\\openworld_slash_ue5\\plugins\\developer\\riderlink\\source\\rd\\thirdparty\\countdownlatch\\countdownlatch.cpp",
         "ProvidedModule": "",
         "Includes": [
-            "c:\\users\\uerden4601\\desktop\\unrealapplications\\openworld_untitled(slash)_ue5\\openworld_slash_ue5\\plugins\\developer\\riderlink\\intermediate\\build\\win64\\unrealeditor\\development\\rd\\definitions.h",
+            "c:\\users\\uerden4601\\desktop\\ue_openworld\\openworld_slash_ue5\\plugins\\developer\\riderlink\\intermediate\\build\\win64\\unrealeditor\\development\\rd\\definitions.h",
             "c:\\program files\\microsoft visual studio\\2022\\community\\vc\\tools\\msvc\\14.34.31933\\include\\chrono",
             "c:\\program files\\microsoft visual studio\\2022\\community\\vc\\tools\\msvc\\14.34.31933\\include\\yvals_core.h",
             "c:\\program files\\microsoft visual studio\\2022\\community\\vc\\tools\\msvc\\14.34.31933\\include\\vcruntime.h",
@@ -93,7 +93,7 @@
             "c:\\program files\\microsoft visual studio\\2022\\community\\vc\\tools\\msvc\\14.34.31933\\include\\atomic",
             "c:\\program files\\microsoft visual studio\\2022\\community\\vc\\tools\\msvc\\14.34.31933\\include\\xthreads.h",
             "c:\\program files\\microsoft visual studio\\2022\\community\\vc\\tools\\msvc\\14.34.31933\\include\\xfilesystem_abi.h",
-            "c:\\users\\uerden4601\\desktop\\unrealapplications\\openworld_untitled(slash)_ue5\\openworld_slash_ue5\\plugins\\developer\\riderlink\\source\\rd\\thirdparty\\countdownlatch\\countdownlatch.hpp",
+            "c:\\users\\uerden4601\\desktop\\ue_openworld\\openworld_slash_ue5\\plugins\\developer\\riderlink\\source\\rd\\thirdparty\\countdownlatch\\countdownlatch.hpp",
             "c:\\program files\\microsoft visual studio\\2022\\community\\vc\\tools\\msvc\\14.34.31933\\include\\cinttypes",
             "c:\\program files (x86)\\windows kits\\10\\include\\10.0.22000.0\\ucrt\\inttypes.h",
             "c:\\program files\\microsoft visual studio\\2022\\community\\vc\\tools\\msvc\\14.34.31933\\include\\mutex",
