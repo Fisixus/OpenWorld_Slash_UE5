@@ -22,7 +22,10 @@ public:
 	AMainCharacter();
 	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-	
+
+	UFUNCTION(BlueprintCallable)
+	void SetCanJump(bool bCan);
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -46,6 +49,9 @@ private:
 
 	UPROPERTY(EditAnywhere, Category=Input, meta = (ClampMin = "0.1", ClampMax = "1.0", UIMin = "0.1", UIMax = "1.0"))
 	float MouseSensitivity = 0.5f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta = (AllowPrivateAccess = true))
+	float bCanJump = true;
 
 	UPROPERTY(EditAnywhere, Category=Accessories)
 	TObjectPtr<UGroomComponent> HairComponent;
