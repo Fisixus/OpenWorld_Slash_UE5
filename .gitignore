@@ -54,6 +54,7 @@ Build/*
 
 Content/BlackAlder/*
 Content/MedievalDungeon/*
+Content/AncientContent/*
 
 # Whitelist PakBlacklist-<BuildConfiguration>.txt files
 !Build/*/
