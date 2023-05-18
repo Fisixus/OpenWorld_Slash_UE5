@@ -9,6 +9,7 @@
 #include "../DebugMacros.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GroomComponent.h"
+#include "Items/Weapon.h"
 
 AMainCharacter::AMainCharacter()
 {
@@ -94,6 +95,15 @@ void AMainCharacter::JumpCharacter(const FInputActionValue& Value)
 	}
 }
 
+void AMainCharacter::EquipItem(const FInputActionValue& Value)
+{
+	AWeapon* Weapon = Cast<AWeapon>(OverlappingItem);
+	if(Weapon)
+	{
+		Weapon->Equipped(GetMesh(), FName("RightHandSocket"));
+	}
+}
+
 void AMainCharacter::SetCanJump(bool bCan)
 {
 	bCanJump = bCan;
@@ -117,6 +127,7 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 		EnhancedInputComponent->BindAction(MainCharMoveAction, ETriggerEvent::Triggered, this, &AMainCharacter::MoveCharacter);
 		EnhancedInputComponent->BindAction(MainCharLookAction, ETriggerEvent::Triggered, this, &AMainCharacter::LookCharacter);
 		EnhancedInputComponent->BindAction(MainCharJumpAction, ETriggerEvent::Started, this, &AMainCharacter::JumpCharacter);
+		EnhancedInputComponent->BindAction(MainCharEquipAction, ETriggerEvent::Started, this, &AMainCharacter::EquipItem);
 	}
 }
 

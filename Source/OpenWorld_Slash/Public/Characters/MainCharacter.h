@@ -12,6 +12,7 @@ class UCameraComponent;
 class UInputMappingContext;
 class UInputAction;
 class UGroomComponent;
+class AItem;
 
 UCLASS()
 class OPENWORLD_SLASH_API AMainCharacter : public ACharacter
@@ -32,6 +33,7 @@ protected:
 	void MoveCharacter(const FInputActionValue& Value);
 	void LookCharacter(const FInputActionValue& Value);
 	void JumpCharacter(const FInputActionValue& Value);
+	void EquipItem(const FInputActionValue& Value);
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input ,meta = (AllowPrivateAccess = true))
 	TObjectPtr<UInputMappingContext> MainCharMappingContext;
@@ -41,6 +43,8 @@ private:
 	TObjectPtr<UInputAction> MainCharLookAction;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input ,meta = (AllowPrivateAccess = true))
 	TObjectPtr<UInputAction> MainCharJumpAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input ,meta = (AllowPrivateAccess = true))
+	TObjectPtr<UInputAction> MainCharEquipAction;
 	
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<USpringArmComponent> SpringArmComponent;
@@ -58,4 +62,9 @@ private:
 	
 	UPROPERTY(EditAnywhere, Category=Accessories)
 	TObjectPtr<UGroomComponent> EyebrowsComponent;
+
+	UPROPERTY(VisibleInstanceOnly)
+	TObjectPtr<AItem> OverlappingItem;
+public:
+	FORCEINLINE void SetOverlappingItem(AItem* a){OverlappingItem = a;};
 };

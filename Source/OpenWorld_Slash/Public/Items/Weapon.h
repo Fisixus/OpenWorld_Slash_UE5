@@ -14,6 +14,8 @@ class OPENWORLD_SLASH_API AWeapon : public AItem
 {
 	GENERATED_BODY()
 public:
+	void Equipped(USceneComponent* SceneComponent, FName InSocketName);
+protected:
 	virtual void OnSphereOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult) override;
 	virtual void OnSphereOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex) override;
 };

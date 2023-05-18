@@ -3,6 +3,7 @@
 
 #include "Items/Item.h"
 
+#include "Characters/MainCharacter.h"
 #include "Components/SphereComponent.h"
 #include "OpenWorld_Slash/DebugMacros.h"
 
@@ -51,21 +52,31 @@ float AItem::TransformedCos(float DeltaTime)
 void AItem::OnSphereOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	const FString ActName = OtherActor->GetName();
-	if(GEngine)
+	AMainCharacter* MainChar = Cast<AMainCharacter>(OtherActor);
+	if(MainChar)
 	{
-		GEngine->AddOnScreenDebugMessage(1,30.f,FColor::Blue, ActName);
+		MainChar->SetOverlappingItem(this);
 	}
+	// const FString ActName = OtherActor->GetName();
+	// if(GEngine)
+	// {
+	// 	GEngine->AddOnScreenDebugMessage(1,30.f,FColor::Blue, ActName);
+	// }
 	
 }
 
 void AItem::OnSphereOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	const FString ActName = OtherActor->GetName();
-	if(GEngine)
+	AMainCharacter* MainChar = Cast<AMainCharacter>(OtherActor);
+	if(MainChar)
 	{
-		GEngine->AddOnScreenDebugMessage(1,30.f,FColor::Red, ActName);
+		MainChar->SetOverlappingItem(nullptr);
 	}
+	// const FString ActName = OtherActor->GetName();
+	// if(GEngine)
+	// {
+	// 	GEngine->AddOnScreenDebugMessage(1,30.f,FColor::Red, ActName);
+	// }
 }
 
