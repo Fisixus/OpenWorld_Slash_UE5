@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "InputActionValue.h"
 #include "GameFramework/Character.h"
+#include "Characters/CharacterTypes.h"
 #include "MainCharacter.generated.h"
 
 class USpringArmComponent;
@@ -63,8 +64,11 @@ private:
 	UPROPERTY(EditAnywhere, Category=Accessories)
 	TObjectPtr<UGroomComponent> EyebrowsComponent;
 
+	ECharacterState CharacterState = ECharacterState::ECS_Unequipped;
+	
 	UPROPERTY(VisibleInstanceOnly)
 	TObjectPtr<AItem> OverlappingItem;
 public:
 	FORCEINLINE void SetOverlappingItem(AItem* a){OverlappingItem = a;};
+	FORCEINLINE ECharacterState GetCharacterState() const {return CharacterState;};
 };

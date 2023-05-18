@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Characters/CharacterTypes.h"
 #include "Animation/AnimInstance.h"
 #include "MainCharacterAnimInstance.generated.h"
 
@@ -32,4 +33,7 @@ private:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Movement, meta = (AllowPrivateAccess = true))
 	bool IsFalling;
+
+	UPROPERTY(BlueprintReadOnly, Category="Movement | Character State", meta = (AllowPrivateAccess = true))
+	ECharacterState CharacterState;
 };
