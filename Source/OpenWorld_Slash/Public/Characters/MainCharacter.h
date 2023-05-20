@@ -35,6 +35,7 @@ protected:
 	void LookCharacter(const FInputActionValue& Value);
 	void JumpCharacter(const FInputActionValue& Value);
 	void EquipItem(const FInputActionValue& Value);
+	void Attack(const FInputActionValue& Value);
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input ,meta = (AllowPrivateAccess = true))
 	TObjectPtr<UInputMappingContext> MainCharMappingContext;
@@ -46,6 +47,8 @@ private:
 	TObjectPtr<UInputAction> MainCharJumpAction;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input ,meta = (AllowPrivateAccess = true))
 	TObjectPtr<UInputAction> MainCharEquipAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input ,meta = (AllowPrivateAccess = true))
+	TObjectPtr<UInputAction> MainCharAttackAction;
 	
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<USpringArmComponent> SpringArmComponent;
@@ -68,6 +71,9 @@ private:
 	
 	UPROPERTY(VisibleInstanceOnly)
 	TObjectPtr<AItem> OverlappingItem;
+
+	UPROPERTY(EditDefaultsOnly, Category=Montages)
+	TObjectPtr<UAnimMontage> AttackMontage;
 public:
 	FORCEINLINE void SetOverlappingItem(AItem* a){OverlappingItem = a;};
 	FORCEINLINE ECharacterState GetCharacterState() const {return CharacterState;};

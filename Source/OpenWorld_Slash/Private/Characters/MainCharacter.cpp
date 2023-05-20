@@ -105,6 +105,30 @@ void AMainCharacter::EquipItem(const FInputActionValue& Value)
 	}
 }
 
+void AMainCharacter::Attack(const FInputActionValue& Value)
+{
+	TObjectPtr<UAnimInstance> AnimInstance = GetMesh()->GetAnimInstance();
+	if(AnimInstance && AttackMontage)
+	{
+		AnimInstance->Montage_Play(AttackMontage);
+		int32 AnimSelection = FMath::RandRange(0,1);
+		FName SectionName = FName();
+		switch (AnimSelection)
+		{
+			case 0:
+				SectionName = FName("Attack1");
+			break;
+			case 1:
+				SectionName = FName("Attack2");
+			break;
+			default:
+				SectionName = FName("Attack1");
+			break;
+		}
+		AnimInstance -> Montage_JumpToSection(SectionName, AttackMontage);
+	}
+}
+
 void AMainCharacter::SetCanJump(bool bCan)
 {
 	bCanJump = bCan;
@@ -129,6 +153,7 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 		EnhancedInputComponent->BindAction(MainCharLookAction, ETriggerEvent::Triggered, this, &AMainCharacter::LookCharacter);
 		EnhancedInputComponent->BindAction(MainCharJumpAction, ETriggerEvent::Started, this, &AMainCharacter::JumpCharacter);
 		EnhancedInputComponent->BindAction(MainCharEquipAction, ETriggerEvent::Started, this, &AMainCharacter::EquipItem);
+		EnhancedInputComponent->BindAction(MainCharAttackAction, ETriggerEvent::Started, this, &AMainCharacter::Attack);
 	}
 }
 
