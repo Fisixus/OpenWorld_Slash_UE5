@@ -61,6 +61,7 @@ void AMainCharacter::BeginPlay()
 
 void AMainCharacter::MoveCharacter(const FInputActionValue& Value)
 {
+	if(ActionState == EActionState::ECS_Attacking) return;
 	const FVector2D MovementVector = Value.Get<FVector2D>();
 	/*
 	const FVector ForwardVec = GetActorForwardVector();
@@ -88,6 +89,7 @@ void AMainCharacter::LookCharacter(const FInputActionValue& Value)
 
 void AMainCharacter::JumpCharacter(const FInputActionValue& Value)
 {
+	if(ActionState == EActionState::ECS_Attacking) return;
 	if(bCanJump)
 	{
 		Jump();
@@ -105,24 +107,39 @@ void AMainCharacter::EquipItem(const FInputActionValue& Value)
 	}
 }
 
+bool AMainCharacter::CanAttack() const
+{
+	return ActionState == EActionState::EAS_Unoccupied
+		&& CharacterState != ECharacterState::ECS_Unequipped;
+}
+
 void AMainCharacter::Attack(const FInputActionValue& Value)
 {
-	TObjectPtr<UAnimInstance> AnimInstance = GetMesh()->GetAnimInstance();
+	if(CanAttack())
+	{
+		ActionState = EActionState::ECS_Attacking;
+		PlayAttackMontage();
+	}
+}
+
+void AMainCharacter::PlayAttackMontage() const
+{
+	const TObjectPtr<UAnimInstance> AnimInstance = GetMesh()->GetAnimInstance();
 	if(AnimInstance && AttackMontage)
 	{
 		AnimInstance->Montage_Play(AttackMontage);
-		int32 AnimSelection = FMath::RandRange(0,1);
-		FName SectionName = FName();
+		const int32 AnimSelection = FMath::RandRange(0,1);
+		FName SectionName;
 		switch (AnimSelection)
 		{
-			case 0:
-				SectionName = FName("Attack1");
+		case 0:
+			SectionName = FName("Attack1");
 			break;
-			case 1:
-				SectionName = FName("Attack2");
+		case 1:
+			SectionName = FName("Attack2");
 			break;
-			default:
-				SectionName = FName("Attack1");
+		default:
+			SectionName = FName("Attack1");
 			break;
 		}
 		AnimInstance -> Montage_JumpToSection(SectionName, AttackMontage);

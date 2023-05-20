@@ -8,6 +8,14 @@
 
 class USphereComponent;
 
+UENUM(BlueprintType)
+enum class EItemState:uint8
+{
+	EIS_Hovering,
+	EIS_Equipped
+};
+
+
 UCLASS()
 class OPENWORLD_SLASH_API AItem : public AActor
 {
@@ -18,10 +26,10 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION(BlueprintPure)
-	float TransformedSin(float DeltaTime);
+	float TransformedSin() const;
 
 	UFUNCTION(BlueprintPure)
-	float TransformedCos(float DeltaTime);
+	float TransformedCos() const;
 
 protected:
 	UFUNCTION()
@@ -38,6 +46,8 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<UStaticMeshComponent> ItemMeshComponent;
+
+	EItemState ItemState = EItemState::EIS_Hovering;
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))

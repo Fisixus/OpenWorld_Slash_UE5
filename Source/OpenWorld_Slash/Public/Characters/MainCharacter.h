@@ -29,14 +29,25 @@ public:
 	void SetCanJump(bool bCan);
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	bool CanAttack() const;
+	/**
+	* Callbacks For Input
+	*/
 	void MoveCharacter(const FInputActionValue& Value);
 	void LookCharacter(const FInputActionValue& Value);
 	void JumpCharacter(const FInputActionValue& Value);
 	void EquipItem(const FInputActionValue& Value);
 	void Attack(const FInputActionValue& Value);
+	/**
+	* Montage Functions
+	*/
+	void PlayAttackMontage() const;
+	
 private:
+	/**
+	* Input Actions
+	*/
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input ,meta = (AllowPrivateAccess = true))
 	TObjectPtr<UInputMappingContext> MainCharMappingContext;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input ,meta = (AllowPrivateAccess = true))
@@ -68,6 +79,8 @@ private:
 	TObjectPtr<UGroomComponent> EyebrowsComponent;
 
 	ECharacterState CharacterState = ECharacterState::ECS_Unequipped;
+	UPROPERTY(BlueprintReadWrite, meta = (AllowPrivateAccess = true))
+	EActionState ActionState = EActionState::EAS_Unoccupied;
 	
 	UPROPERTY(VisibleInstanceOnly)
 	TObjectPtr<AItem> OverlappingItem;

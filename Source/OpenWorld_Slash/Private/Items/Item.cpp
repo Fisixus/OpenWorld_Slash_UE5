@@ -32,20 +32,23 @@ void AItem::BeginPlay()
 void AItem::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	RunningTime += DeltaTime;
+
 	//const FString Message = FString::Printf(TEXT("DELTATIME: %f"), DeltaTime);
 	//DEBUG_PRINT_SCREEN(2, Message)
-	
+	if(ItemState == EItemState::EIS_Hovering)
+	{
+		AddActorWorldOffset(FVector(0.f,0.f,TransformedCos()));
+	}
 }
 
-float AItem::TransformedSin(float DeltaTime)
+float AItem::TransformedSin() const
 {
-	RunningTime += DeltaTime;
 	return Amplitude * FMath::Sin(RunningTime * TimeConstant);
 }
 
-float AItem::TransformedCos(float DeltaTime)
+float AItem::TransformedCos() const 
 {
-	RunningTime += DeltaTime;
 	return Amplitude * FMath::Cos(RunningTime * TimeConstant);
 }
 

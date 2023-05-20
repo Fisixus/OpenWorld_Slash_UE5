@@ -8,6 +8,7 @@
 void AWeapon::Equipped(USceneComponent* InParent, FName InSocketName)
 {
 	ItemMeshComponent->AttachToComponent(InParent, FAttachmentTransformRules::SnapToTargetNotIncludingScale, InSocketName);
+	ItemState = EItemState::EIS_Equipped;
 }
 
 void AWeapon::OnSphereOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
