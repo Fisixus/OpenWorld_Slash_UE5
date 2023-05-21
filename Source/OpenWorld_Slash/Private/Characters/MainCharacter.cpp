@@ -170,7 +170,7 @@ void AMainCharacter::PlayAttackMontage() const
 	if(AnimInstance && AttackMontage)
 	{
 		AnimInstance->Montage_Play(AttackMontage);
-		const int32 AnimSelection = FMath::RandRange(0,1);
+		const int32 AnimSelection = FMath::RandRange(0,3);
 		FName SectionName;
 		switch (AnimSelection)
 		{
@@ -179,6 +179,9 @@ void AMainCharacter::PlayAttackMontage() const
 			break;
 		case 1:
 			SectionName = FName("Attack2");
+			break;
+		case 2:
+			SectionName = FName("Attack3");
 			break;
 		default:
 			SectionName = FName("Attack1");
