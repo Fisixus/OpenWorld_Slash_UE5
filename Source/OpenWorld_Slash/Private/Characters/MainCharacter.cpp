@@ -100,7 +100,7 @@ void AMainCharacter::JumpCharacter(const FInputActionValue& Value)
 void AMainCharacter::EquipItem(const FInputActionValue& Value)
 {
 	AWeapon* Weapon = Cast<AWeapon>(OverlappingItem);
-	if(Weapon && !EquippedWeapon)
+	if(Weapon) //&& !EquippedWeapon)
 	{
 		//UE_LOG(LogTemp, Warning, TEXT("AA!"));
 		Weapon->Equipped(GetMesh(), FName("RightHandSocket"));

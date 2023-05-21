@@ -4,6 +4,8 @@
 #include "Items/Weapon.h"
 
 #include "Characters/MainCharacter.h"
+#include "Components/SphereComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 void AWeapon::AttachMeshToSocket(USceneComponent* InParent, FName InSocketName) const
 {
@@ -14,6 +16,18 @@ void AWeapon::Equipped(USceneComponent* InParent, FName InSocketName)
 {
 	AttachMeshToSocket(InParent, InSocketName);
 	ItemState = EItemState::EIS_Equipped;
+	if(EquipSound)
+	{
+		UGameplayStatics::PlaySoundAtLocation(
+			this,
+			EquipSound,
+			GetActorLocation()
+			);
+	}
+	if(SphereComponent)
+	{
+		SphereComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	}
 }
 
 void AWeapon::OnSphereOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
