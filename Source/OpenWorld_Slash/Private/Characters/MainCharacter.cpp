@@ -61,7 +61,7 @@ void AMainCharacter::BeginPlay()
 
 void AMainCharacter::MoveCharacter(const FInputActionValue& Value)
 {
-	if(ActionState == EActionState::ECS_Attacking) return;
+	if(ActionState != EActionState::EAS_Unoccupied) return;
 	const FVector2D MovementVector = Value.Get<FVector2D>();
 	/*
 	const FVector ForwardVec = GetActorForwardVector();
@@ -89,7 +89,7 @@ void AMainCharacter::LookCharacter(const FInputActionValue& Value)
 
 void AMainCharacter::JumpCharacter(const FInputActionValue& Value)
 {
-	if(ActionState == EActionState::ECS_Attacking) return;
+	if(ActionState != EActionState::EAS_Unoccupied) return;
 	if(bCanJump)
 	{
 		Jump();
@@ -100,10 +100,42 @@ void AMainCharacter::JumpCharacter(const FInputActionValue& Value)
 void AMainCharacter::EquipItem(const FInputActionValue& Value)
 {
 	AWeapon* Weapon = Cast<AWeapon>(OverlappingItem);
-	if(Weapon)
+	if(Weapon && !EquippedWeapon)
 	{
+		//UE_LOG(LogTemp, Warning, TEXT("AA!"));
 		Weapon->Equipped(GetMesh(), FName("RightHandSocket"));
 		CharacterState = ECharacterState::ECS_EquippedOneHandedWeapon;
+		EquippedWeapon = Weapon;
+	}
+	else
+	{
+		//UE_LOG(LogTemp, Warning, TEXT("BB!"));
+		if(CharacterState != ECharacterState::ECS_Unequipped
+			&& ActionState == EActionState::EAS_Unoccupied)
+		{
+			//UE_LOG(LogTemp, Warning, TEXT("CC!"));
+			PlayEquipMontage(FName("Unequip"));
+			CharacterState = ECharacterState::ECS_Unequipped;
+			ActionState = EActionState::EAS_EquppingWeapon;
+		}
+		else if(CharacterState == ECharacterState::ECS_Unequipped
+			&& ActionState == EActionState::EAS_Unoccupied
+			&& EquippedWeapon)
+		{
+			PlayEquipMontage(FName("Equip"));
+			CharacterState = ECharacterState::ECS_EquippedOneHandedWeapon;
+			ActionState = EActionState::EAS_EquppingWeapon;
+		}
+	}
+}
+
+void AMainCharacter::PlayEquipMontage(FName SectionName) const
+{
+	const TObjectPtr<UAnimInstance> AnimInstance = GetMesh()->GetAnimInstance();
+	if(AnimInstance && EquipMontage)
+	{
+		AnimInstance->Montage_Play(EquipMontage);
+		AnimInstance -> Montage_JumpToSection(SectionName, EquipMontage);
 	}
 }
 
@@ -113,11 +145,21 @@ bool AMainCharacter::CanAttack() const
 		&& CharacterState != ECharacterState::ECS_Unequipped;
 }
 
+void AMainCharacter::Disarm()
+{
+	EquippedWeapon->AttachMeshToSocket(GetMesh(), FName("SpineSocket"));
+}
+
+void AMainCharacter::Arm()
+{
+	EquippedWeapon->AttachMeshToSocket(GetMesh(), FName("RightHandSocket"));
+}
+
 void AMainCharacter::Attack(const FInputActionValue& Value)
 {
 	if(CanAttack())
 	{
-		ActionState = EActionState::ECS_Attacking;
+		ActionState = EActionState::EAS_Attacking;
 		PlayAttackMontage();
 	}
 }
@@ -145,6 +187,7 @@ void AMainCharacter::PlayAttackMontage() const
 		AnimInstance -> Montage_JumpToSection(SectionName, AttackMontage);
 	}
 }
+
 
 void AMainCharacter::SetCanJump(bool bCan)
 {

@@ -14,6 +14,7 @@ class UInputMappingContext;
 class UInputAction;
 class UGroomComponent;
 class AItem;
+class AWeapon;
 
 UCLASS()
 class OPENWORLD_SLASH_API AMainCharacter : public ACharacter
@@ -27,7 +28,11 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void SetCanJump(bool bCan);
-
+	UFUNCTION(BlueprintCallable)
+	void Disarm();
+	UFUNCTION(BlueprintCallable)
+	void Arm();
+	
 protected:
 	virtual void BeginPlay() override;
 	bool CanAttack() const;
@@ -43,6 +48,7 @@ protected:
 	* Montage Functions
 	*/
 	void PlayAttackMontage() const;
+	void PlayEquipMontage(FName SectionName) const;
 	
 private:
 	/**
@@ -85,8 +91,13 @@ private:
 	UPROPERTY(VisibleInstanceOnly)
 	TObjectPtr<AItem> OverlappingItem;
 
+	UPROPERTY(VisibleAnywhere, Category=Weapon)
+	TObjectPtr<AWeapon> EquippedWeapon;
+
 	UPROPERTY(EditDefaultsOnly, Category=Montages)
 	TObjectPtr<UAnimMontage> AttackMontage;
+	UPROPERTY(EditDefaultsOnly, Category=Montages)
+	TObjectPtr<UAnimMontage> EquipMontage;
 public:
 	FORCEINLINE void SetOverlappingItem(AItem* a){OverlappingItem = a;};
 	FORCEINLINE ECharacterState GetCharacterState() const {return CharacterState;};

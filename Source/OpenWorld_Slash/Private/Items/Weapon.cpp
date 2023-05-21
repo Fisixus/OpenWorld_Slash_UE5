@@ -5,9 +5,14 @@
 
 #include "Characters/MainCharacter.h"
 
-void AWeapon::Equipped(USceneComponent* InParent, FName InSocketName)
+void AWeapon::AttachMeshToSocket(USceneComponent* InParent, FName InSocketName) const
 {
 	ItemMeshComponent->AttachToComponent(InParent, FAttachmentTransformRules::SnapToTargetNotIncludingScale, InSocketName);
+}
+
+void AWeapon::Equipped(USceneComponent* InParent, FName InSocketName)
+{
+	AttachMeshToSocket(InParent, InSocketName);
 	ItemState = EItemState::EIS_Equipped;
 }
 
