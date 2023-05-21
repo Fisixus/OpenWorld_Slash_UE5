@@ -9,6 +9,7 @@
 #include "../DebugMacros.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GroomComponent.h"
+#include "Components/BoxComponent.h"
 #include "Items/Weapon.h"
 
 AMainCharacter::AMainCharacter()
@@ -203,8 +204,12 @@ void AMainCharacter::Tick(float DeltaTime)
 	//AddControllerPitchInput(0.5f * MouseSensitivity);
 	//AddControllerYawInput(0.5f * MouseSensitivity);
 	//AddControllerRollInput(0.5f * MouseSensitivity);
+}
 
-
+void AMainCharacter::SetWeaponCollision(ECollisionEnabled::Type CollisionType)
+{
+	if(!EquippedWeapon) return;
+	EquippedWeapon->GetWeaponBox()->SetCollisionEnabled(CollisionType);
 }
 
 void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
