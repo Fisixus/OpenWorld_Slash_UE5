@@ -33,5 +33,10 @@ private:
 	
 	UPROPERTY(EditDefaultsOnly, Category=Montages)
 	TObjectPtr<UAnimMontage> ReactMontage;
+	
+	UPROPERTY(EditAnywhere, Category="Sounds")
+	TObjectPtr<USoundBase> HitSound;
 
+	UPROPERTY(EditAnywhere, Category="Particles")
+	TObjectPtr<UParticleSystem> HitParticle;
 };

@@ -3,6 +3,7 @@
 #include "Enemies/Enemy.h"
 
 #include "Components/CapsuleComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "OpenWorld_Slash/DebugMacros.h"
 
 AEnemy::AEnemy()
@@ -79,5 +80,21 @@ void AEnemy::GetHit(const FVector& ImpactPoint)
 {
 	//DEBUG_DRAW_SPHERE(ImpactPoint, FColor::Blue);
 	DirectionalHitReact(ImpactPoint);
+	if(HitSound)
+	{
+		UGameplayStatics::PlaySoundAtLocation(
+			this,
+			HitSound,
+			ImpactPoint
+		);
+	}
+	if(HitParticle)
+	{
+		UGameplayStatics::SpawnEmitterAtLocation(
+			GetWorld(),
+			HitParticle,
+			ImpactPoint
+		);
+	}
 }
 
