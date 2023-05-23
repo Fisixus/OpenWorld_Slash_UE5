@@ -210,6 +210,7 @@ void AMainCharacter::SetWeaponCollision(ECollisionEnabled::Type CollisionType)
 {
 	if(!EquippedWeapon) return;
 	EquippedWeapon->GetWeaponBox()->SetCollisionEnabled(CollisionType);
+	EquippedWeapon->IgnoreActors.Empty();
 }
 
 void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)

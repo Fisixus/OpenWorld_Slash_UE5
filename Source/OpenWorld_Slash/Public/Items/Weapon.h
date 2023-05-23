@@ -18,6 +18,8 @@ public:
 	AWeapon();
 	void AttachMeshToSocket(USceneComponent* InParent, FName InSocketName) const;
 	void Equipped(USceneComponent* SceneComponent, FName InSocketName);
+	TArray<AActor*> IgnoreActors;
+
 protected:
 	virtual void OnSphereOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult) override;
 	virtual void OnSphereOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex) override;
@@ -37,6 +39,7 @@ private:
 
 	UPROPERTY(VisibleAnywhere, Category="Weapon Properties")
 	TObjectPtr<USceneComponent> WeaponEndTrace;
+
 
 public:
 	FORCEINLINE TObjectPtr<UBoxComponent> GetWeaponBox() const {return WeaponBox;}
