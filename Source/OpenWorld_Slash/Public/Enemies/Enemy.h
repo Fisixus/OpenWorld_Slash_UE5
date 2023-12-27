@@ -7,6 +7,9 @@
 #include "Interfaces/HitInterface.h"
 #include "Enemy.generated.h"
 
+class UAttributeComponent;
+class UHealthBarComponent;
+
 UCLASS()
 class OPENWORLD_SLASH_API AEnemy : public ACharacter, public IHitInterface
 {
@@ -30,6 +33,12 @@ protected:
 	void PlayReactMontage(const FName& SectionName) const;
 	
 private:
+
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr<UAttributeComponent> AttributesComponent;
+
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr<UHealthBarComponent> HealthBarWidget;
 	
 	UPROPERTY(EditDefaultsOnly, Category=Montages)
 	TObjectPtr<UAnimMontage> ReactMontage;
