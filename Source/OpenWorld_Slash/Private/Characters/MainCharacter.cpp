@@ -117,7 +117,7 @@ void AMainCharacter::EquipItem(const FInputActionValue& Value)
 			//UE_LOG(LogTemp, Warning, TEXT("CC!"));
 			PlayEquipMontage(FName("Unequip"));
 			CharacterState = ECharacterState::ECS_Unequipped;
-			ActionState = EActionState::EAS_EquppingWeapon;
+			ActionState = EActionState::EAS_EquippingWeapon;
 		}
 		else if(CharacterState == ECharacterState::ECS_Unequipped
 			&& ActionState == EActionState::EAS_Unoccupied
@@ -125,7 +125,7 @@ void AMainCharacter::EquipItem(const FInputActionValue& Value)
 		{
 			PlayEquipMontage(FName("Equip"));
 			CharacterState = ECharacterState::ECS_EquippedOneHandedWeapon;
-			ActionState = EActionState::EAS_EquppingWeapon;
+			ActionState = EActionState::EAS_EquippingWeapon;
 		}
 	}
 }

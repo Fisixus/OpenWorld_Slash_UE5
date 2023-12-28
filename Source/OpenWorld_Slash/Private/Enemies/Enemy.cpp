@@ -82,10 +82,53 @@ void AEnemy::DirectionalHitReact(const FVector& ImpactPoint)
 	PlayReactMontage(SectionName);
 }
 
+void AEnemy::Die()
+{
+	const TObjectPtr<UAnimInstance> AnimInstance = GetMesh()->GetAnimInstance();
+	if(AnimInstance && DeathMontage)
+	{
+		AnimInstance->Montage_Play(DeathMontage);
+
+		const int32 AnimSelection = FMath::RandRange(0,4);
+		FName SectionName;
+		switch (AnimSelection)
+		{
+		case 0:
+			SectionName = FName("Death1");
+			DeathPose = EDeathPose::EDP_Dead1;
+			break;
+		case 1:
+			SectionName = FName("Death2");
+			DeathPose = EDeathPose::EDP_Dead2;
+			break;
+		case 2:
+			SectionName = FName("Death3");
+			DeathPose = EDeathPose::EDP_Dead3;
+			break;
+		case 3:
+			SectionName = FName("Death4");
+			DeathPose = EDeathPose::EDP_Dead4;
+			break;
+		default:
+			SectionName = FName("Death1");
+			DeathPose = EDeathPose::EDP_Dead1;
+			break;
+		}
+		AnimInstance -> Montage_JumpToSection(SectionName, DeathMontage);
+	}
+}
+
 void AEnemy::GetHit_Implementation(const FVector& ImpactPoint)
 {
 	//DEBUG_DRAW_SPHERE(ImpactPoint, FColor::Blue);
-	DirectionalHitReact(ImpactPoint);
+	if (AttributesComponent && AttributesComponent->IsAlive())
+	{
+		DirectionalHitReact(ImpactPoint);
+	}
+	else
+	{
+		Die();
+	}
 	if(HitSound)
 	{
 		UGameplayStatics::PlaySoundAtLocation(
