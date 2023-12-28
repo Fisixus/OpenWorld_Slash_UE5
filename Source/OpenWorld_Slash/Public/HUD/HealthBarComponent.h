@@ -19,5 +19,5 @@ public:
 
 private:
 	UPROPERTY()
-	TObjectPtr<UHealthBar> HealthBarWidget;
+	TObjectPtr<UHealthBar> HealthBarComponent;
 };

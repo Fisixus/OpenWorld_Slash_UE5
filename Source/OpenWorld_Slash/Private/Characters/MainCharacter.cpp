@@ -104,7 +104,7 @@ void AMainCharacter::EquipItem(const FInputActionValue& Value)
 	if(Weapon) //&& !EquippedWeapon)
 	{
 		//UE_LOG(LogTemp, Warning, TEXT("AA!"));
-		Weapon->Equipped(GetMesh(), FName("RightHandSocket"));
+		Weapon->Equipped(GetMesh(), FName("RightHandSocket"), this, this);
 		CharacterState = ECharacterState::ECS_EquippedOneHandedWeapon;
 		EquippedWeapon = Weapon;
 	}

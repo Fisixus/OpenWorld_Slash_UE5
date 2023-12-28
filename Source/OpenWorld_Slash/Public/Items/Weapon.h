@@ -17,9 +17,10 @@ class OPENWORLD_SLASH_API AWeapon : public AItem
 public:
 	AWeapon();
 	void AttachMeshToSocket(USceneComponent* InParent, FName InSocketName) const;
-	void Equipped(USceneComponent* SceneComponent, FName InSocketName);
+	void Equipped(USceneComponent* SceneComponent, FName InSocketName, AActor* NewOwner, APawn* NewInstigator);
 	TArray<AActor*> IgnoreActors;
 
+	
 protected:
 	virtual void OnSphereOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult) override;
 	virtual void OnSphereOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex) override;
@@ -42,6 +43,8 @@ private:
 	UPROPERTY(VisibleAnywhere, Category="Weapon Properties")
 	TObjectPtr<USceneComponent> WeaponEndTrace;
 
+	UPROPERTY(EditAnywhere, Category="Weapon Properties")
+	float Damage = 20.f;
 
 public:
 	FORCEINLINE TObjectPtr<UBoxComponent> GetWeaponBox() const {return WeaponBox;}
