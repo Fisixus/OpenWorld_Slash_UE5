@@ -116,6 +116,9 @@ void AEnemy::Die()
 		}
 		AnimInstance -> Montage_JumpToSection(SectionName, DeathMontage);
 	}
+	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	SetLifeSpan(7.5f);
+	HealthBarWidget->SetVisibility(false);
 }
 
 void AEnemy::GetHit_Implementation(const FVector& ImpactPoint)
